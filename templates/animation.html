@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Tailwind CDN (if you’re not already including it in base.html) -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+<div class="flex flex-col md:flex-row h-full w-full bg-gray-50 text-gray-900 min-h-screen">
+
+  <!-- Left: Text Input and Mic -->
+  <div class="md:w-1/2 p-10 flex flex-col justify-center items-center bg-white shadow-md">
+    <h2 class="text-3xl font-semibold mb-5 text-center">Transcribe & Translate</h2>
+    
+    <form action="" method="post" class="w-full max-w-md space-y-6">
+      {% csrf_token %}
+      <div class="flex items-center border rounded px-3 py-2 bg-gray-100">
+        <input type="text" name="sen" class="flex-grow text-lg bg-gray-100 border-none focus:outline-none" placeholder="Start typing or use mic..." id="speechToText" />
+        <button type="button" onclick="record()" class="ml-2 focus:outline-none">
+          <img src="{% static 'mic3.png' %}" alt="Mic" class="w-7 h-7 hover:scale-105 transition-transform duration-150" />
+        </button>
+      </div>
+      <div class="flex justify-end">
+        <input type="submit" value="Submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded cursor-pointer transition duration-150" />
+      </div>
+    </form>
+
+    {% if text %}
+    <div class="mt-10 w-full max-w-md">
+      <h3 class="text-gray-700 text-sm mb-1 font-medium">Transcribed Text</h3>
+      <div class="border rounded px-4 py-2 bg-gray-100 text-gray-800 text-lg">{{ text }}</div>
+    </div>
+    {% endif %}
+    
+    <!-- Hidden list of words for JS -->
+    <ul class="hidden" id="list">
+      {% for word in words %}
+        <li id="{{ forloop.counter0 }}">{{ word }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Right: Video Player Section -->
+  <div class="md:w-1/2 bg-gray-100 p-10 flex flex-col justify-center items-center">
+    <h2 class="text-3xl font-semibold mb-5 text-center">Animated Sign Lang</h2>
+
+    <video id="videoPlayer" width="720" height="420" preload="auto" class="rounded-lg shadow-lg border" autoplay muted>
+      <source src="" type="video/mp4" />
+      Your browser does not support HTML5 video.
+    </video>
+
+    <div class="mt-6">
+      <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded transition duration-150" onclick="playPause()">Play / Pause</button>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript for Speech and Video -->
+<script>
+  // Speech to Text using Webkit
+  function record(){
+      var recognition = new webkitSpeechRecognition();
+      recognition.lang = 'en-IN';
+      recognition.onresult = function(event) {
+          document.getElementById('speechToText').value = event.results[0][0].transcript;
+      }
+      recognition.start();
+  }
+
+  function play() {
+    const videoPlayer = document.getElementById("videoPlayer");
+    const words = document.getElementById("list").getElementsByTagName("li");
+
+    if (!words.length) return;
+
+    const videoSource = Array.from(words).map(li => "/static/" + li.innerHTML.trim() + ".mp4");
+    let i = 0;
+
+    function videoPlay(index) {
+      videoPlayer.src = videoSource[index];
+      videoPlayer.load();
+      videoPlayer.play();
+    }
+
+    function myHandler() {
+      i++;
+      if (i < videoSource.length) {
+        videoPlay(i);
+      }
+    }
+
+    videoPlayer.removeEventListener('ended', myHandler); // Prevent duplicate binding
+    videoPlayer.addEventListener('ended', myHandler);
+
+    videoPlay(0);
+  }
+
+  function playPause() {
+    const videoPlayer = document.getElementById("videoPlayer");
+    if (videoPlayer.paused) {
+      play();
+    } else {
+      videoPlayer.pause();
+    }
+  }
+</script>
+{% endblock %}
