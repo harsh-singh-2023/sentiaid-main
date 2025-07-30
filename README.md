@@ -207,10 +207,3 @@ Selected by NSRCEL, IIM Bangalore (Campus Founder Program)
 📧 [support@sentiaid.co.in]  
 🌐 [sentaid.co.in]
 
-## Appendix: Tools for Stakeholder Presentations
-
-- Use Mermaid Live Editor for customizing diagrams
-- Convert this doc to a PowerPoint/Google Slide deck
-- Reference India’s RPWD Act & NEP 2020 for policy context
-- Export diagrams to Figma, Pitch, or Miro for investor presentations
-- Include video demo of MVP in pitch if possible
