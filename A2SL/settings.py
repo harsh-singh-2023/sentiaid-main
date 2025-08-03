@@ -25,7 +25,15 @@ SECRET_KEY = '3k7=!d39#4@_&5a6to&4=_=j(c^v0(vv91cj5+9e8+d4&+01jb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '10.1.0.186']
+
+# CORS settings for Next.js frontend
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 
 # Application definition
@@ -121,4 +129,5 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [    
     os.path.join(BASE_DIR,"assets"),
+    os.path.join(BASE_DIR,"frontend","public"),
 ]

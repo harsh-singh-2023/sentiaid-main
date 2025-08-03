@@ -88,8 +88,7 @@ export default function ConverterPage() {
 
     setIsProcessing(true);
     try {
-      // For demo purposes, we'll simulate the Django backend processing
-      // In real implementation, this would call the Django API
+      // Try to connect to Django backend API
       const response = await fetch('http://localhost:8000/api/process-text/', {
         method: 'POST',
         headers: {
@@ -109,8 +108,8 @@ export default function ConverterPage() {
         setWords(demoWords.map((word, index) => ({ word, index })));
       }
     } catch (error: unknown) {
-      // Fallback processing for demo
-      console.log('API not available, using fallback processing');
+      // Fallback processing for demo - Django backend not available
+      console.log('Django API not available, using fallback processing');
       const demoWords = inputText.toLowerCase().split(' ').filter(word => word.length > 0);
       setProcessedText(inputText);
       setWords(demoWords.map((word, index) => ({ word, index })));
