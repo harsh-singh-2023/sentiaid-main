@@ -2,6 +2,139 @@
 
 Empowering Media, Government, Education, and Public Spaces with AI-powered Sign Language Accessibility
 
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ 
+- Python 3.8+
+- npm or yarn
+
+### Frontend (Next.js)
+
+1. **Install dependencies:**
+   ```bash
+   npm run install-frontend
+   ```
+
+2. **Start development server:**
+   ```bash
+   npm run dev
+   ```
+   The frontend will be available at `http://localhost:3000`
+
+3. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+4. **Start production server:**
+   ```bash
+   npm run start
+   ```
+
+### Backend (Django)
+
+1. **Install Python dependencies:**
+   ```bash
+   pip install django==3.0.4 nltk
+   ```
+
+2. **Run migrations:**
+   ```bash
+   npm run django-migrate
+   ```
+
+3. **Start Django development server:**
+   ```bash
+   npm run django-dev
+   ```
+   The Django API will be available at `http://localhost:8000`
+
+## 🏗️ Project Structure
+
+```
+sentiaid-main/
+├── frontend/                 # Next.js application
+│   ├── src/
+│   │   ├── app/             # App router pages
+│   │   └── components/      # React components
+│   ├── public/              # Static assets including ISL videos
+│   └── package.json
+├── A2SL/                    # Django backend
+├── assets/                  # Original video assets (copied to frontend/public)
+├── manage.py               # Django management script
+└── package.json           # Root package.json with scripts
+```
+
+## 🎯 Features
+
+- **Modern Next.js Frontend**: Built with React 19, TypeScript, and Tailwind CSS
+- **Real-time Speech Recognition**: Convert speech to text using Web Speech API
+- **AI-Powered Translation**: Process text using NLP to generate ISL-compatible format
+- **Video Animation Playback**: Play synchronized ISL video animations
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Django API Backend**: Robust text processing and sign language mapping
+
+## 🧠 Technology Stack
+
+### Frontend
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS 4
+- **Components**: React 19
+- **Build Tool**: Turbopack (Next.js)
+
+### Backend  
+- **Framework**: Django 3.0.4
+- **Language**: Python 3.8+
+- **NLP**: NLTK, spaCy
+- **Database**: SQLite (default)
+
+## 📱 Usage
+
+1. **Home Page**: Introduction to SentiAid and its features
+2. **Converter Page**: Main application interface
+   - Enter text manually or use speech recognition
+   - Click "Convert to ISL" to process the text
+   - Watch the generated sign language animations
+3. **About Page**: Detailed information about the platform
+4. **Contact Page**: Get in touch with the team
+
+## 🔧 Development
+
+### Frontend Development
+```bash
+cd frontend
+npm run dev
+```
+
+### Backend Development  
+```bash
+python manage.py runserver
+```
+
+### Linting
+```bash
+npm run lint
+```
+
+## 🚀 Deployment
+
+### Frontend (Vercel/Netlify)
+```bash
+npm run build
+```
+
+### Backend (Heroku/AWS)
+Configure your preferred hosting platform with the Django application.
+
+## 📊 API Integration
+
+The Next.js frontend communicates with the Django backend via REST API:
+
+- **POST** `/api/process-text/`: Process text for sign language conversion
+- **GET** `/static/{word}.mp4`: Retrieve sign language video files
+
 ## 1. Executive Summary
 
 SentiAid is a deep-tech SaaS platform enabling seamless Indian Sign Language (ISL) translation using AI and NLP. We serve media houses, government agencies, educational institutions, and public infrastructure - helping them meet accessibility mandates and reach underserved deaf and mute communities.
@@ -124,7 +257,7 @@ flowchart TD
 
 | Layer | Technology/Service |
 |-------|--------------------|
-| Frontend | React.js, Next.js, TailwindCSS |
+| Frontend | Next.js 15, React 19, TypeScript, TailwindCSS 4 |
 | Backend/API | Django, FastAPI, Python |
 | NLP/AI Models | NLTK, spaCy, Transformers, ASR (Google, Azure), TTS |
 | Media Processing | FFmpeg, OpenCV |

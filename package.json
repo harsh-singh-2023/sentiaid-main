@@ -1,0 +1,28 @@
+{
+  "name": "sentiaid-main",
+  "version": "1.0.0",
+  "description": "SentiAid - AI-powered Indian Sign Language (ISL) translation platform",
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "start": "cd frontend && npm run start",
+    "lint": "cd frontend && npm run lint",
+    "install-frontend": "cd frontend && npm install",
+    "django-dev": "python manage.py runserver",
+    "django-migrate": "python manage.py migrate"
+  },
+  "keywords": [
+    "sign-language",
+    "ai",
+    "accessibility",
+    "nextjs",
+    "django",
+    "isl"
+  ],
+  "author": "Harsh Singh",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "python": ">=3.8"
+  }
+}
